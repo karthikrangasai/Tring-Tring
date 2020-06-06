@@ -5,8 +5,8 @@ var demo_stream;
 var demo_video = document.getElementById('demo-video');
 var peer_name_input = document.getElementById('peer-name');
 var join_btn = document.getElementById('join-btn');
-var join_control_video = document.getElementById('join-control-video');
-var join_control_audio = document.getElementById('join-control-audio');
+// var join_control_video = document.getElementById('join-control-video');
+// var join_control_audio = document.getElementById('join-control-audio');
 var error_label = document.getElementById('error-label');
 var join_call = document.getElementById('join-call');
 
@@ -15,41 +15,41 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) 
     retreived_user_media = true;
     console.log(stream);
     demo_stream = stream;
-    // var audioTrack_demo = demo_stream.getAudioTracks()[0];
-    // audioTrack_demo.enabled = !audioTrack_demo.enabled;
+    var audioTrack_demo = demo_stream.getAudioTracks()[0];
+    audioTrack_demo.enabled = !audioTrack_demo.enabled;
     demo_video.srcObject = stream;
 }).catch((error) => {
     alert("Please provide access to any or all Media Devices !!")
     retreived_user_media = false;
 });
 
-// Media Tooglers for the Demo MediaStream Input
-join_control_audio.addEventListener('click', (e) => {
-    var audioTrack = demo_stream.getAudioTracks()[0];
-    if (audioTrack.enabled) {
-        e.target.innerHTML = "mic_off";
-        call_audio_control.innerHTML = "mic_off";
-        user_input_audio_toggle = false;
-    } else {
-        e.target.innerHTML = "mic";
-        call_audio_control.innerHTML = "mic";
-        user_input_audio_toggle = true;
-    }
-    audioTrack.enabled = !audioTrack.enabled;
-});
-join_control_video.addEventListener('click', (e) => {
-    var videoTrack = demo_stream.getVideoTracks()[0];
-    if (videoTrack.enabled) {
-        e.target.innerHTML = "videocam_off";
-        call_video_control.innerHTML = "videocam_off"
-        user_input_audio_toggle = false;
-    } else {
-        e.target.innerHTML = "videocam";
-        call_video_control.innerHTML = "videocam"
-        user_input_audio_toggle = true;
-    }
-    videoTrack.enabled = !videoTrack.enabled;
-});
+// // Media Tooglers for the Demo MediaStream Input
+// join_control_audio.addEventListener('click', (e) => {
+//     var audioTrack = demo_stream.getAudioTracks()[0];
+//     if (audioTrack.enabled) {
+//         e.target.innerHTML = "mic_off";
+//         call_audio_control.innerHTML = "mic_off";
+//         user_input_audio_toggle = false;
+//     } else {
+//         e.target.innerHTML = "mic";
+//         call_audio_control.innerHTML = "mic";
+//         user_input_audio_toggle = true;
+//     }
+//     audioTrack.enabled = !audioTrack.enabled;
+// });
+// join_control_video.addEventListener('click', (e) => {
+//     var videoTrack = demo_stream.getVideoTracks()[0];
+//     if (videoTrack.enabled) {
+//         e.target.innerHTML = "videocam_off";
+//         call_video_control.innerHTML = "videocam_off"
+//         user_input_audio_toggle = false;
+//     } else {
+//         e.target.innerHTML = "videocam";
+//         call_video_control.innerHTML = "videocam"
+//         user_input_audio_toggle = true;
+//     }
+//     videoTrack.enabled = !videoTrack.enabled;
+// });
 
 
 
@@ -77,26 +77,26 @@ var mediaConstraints = {
 }
 var peer_connection_configuration = {
     "iceServers": [
-        { "url": "stun.l.google.com: 19302" },
-        { "url": "stun1.l.google.com: 19302" },
-        { "url": "stun2.l.google.com: 19302" },
-        { "url": "stun3.l.google.com: 19302" },
-        { "url": "stun4.l.google.com: 19302" },
-        { "url": "stun01.sipphone.com" },
-        { "url": "stun.ekiga.net" },
-        { "url": "stun.fwdnet.net" },
-        { "url": "stun.ideasip.com" },
-        { "url": "stun.iptel.org" },
-        { "url": "stun.rixtelecom.se" },
-        { "url": "stun.schlund.de" },
-        { "url": "stunserver.org" },
-        { "url": "stun.softjoys.com" },
-        { "url": "stun.voiparound.com" },
-        { "url": "stun.voipbuster.com" },
-        { "url": "stun.voipstunt.com" },
-        { "url": "stun.voxgratia.org" },
-        { "url": "stun.xten.com" },
-        { "url": "stun.stunprotocol.org:3478" },
+        { "url": "stun:stun.l.google.com:19302" },
+        { "url": "stun:stun1.l.google.com:19302" },
+        { "url": "stun:stun2.l.google.com:19302" },
+        { "url": "stun:stun3.l.google.com:19302" },
+        { "url": "stun:stun4.l.google.com:19302" },
+        { "url": "stun:stun01.sipphone.com" },
+        { "url": "stun:stun.ekiga.net" },
+        { "url": "stun:stun.fwdnet.net" },
+        { "url": "stun:stun.ideasip.com" },
+        { "url": "stun:stun.iptel.org" },
+        { "url": "stun:stun.rixtelecom.se" },
+        { "url": "stun:stun.schlund.de" },
+        { "url": "stun:stunserver.org" },
+        { "url": "stun:stun.softjoys.com" },
+        { "url": "stun:stun.voiparound.com" },
+        { "url": "stun:stun.voipbuster.com" },
+        { "url": "stun:stun.voipstunt.com" },
+        { "url": "stun:stun.voxgratia.org" },
+        { "url": "stun:stun.xten.com" },
+        { "url": "stun:stun.stunprotocol.org:3478" },
         {
             "urls": [
                 "turn:13.250.13.83:3478?transport=udp"
@@ -145,6 +145,11 @@ function onJoin() {
                 var audioTrack_demo = local_stream.getAudioTracks()[0];
                 // audioTrack_demo.enabled = !audioTrack_demo.enabled;
                 audioTrack_demo.enabled = false;
+            }
+            if (!user_input_video_toggle) {
+                var videoTrack_demo = local_stream.getVideoTracks()[0];
+                // audioTrack_demo.enabled = !audioTrack_demo.enabled;
+                videoTrack_demo.enabled = false;
             }
 
             // demo_video.onpause();
@@ -351,11 +356,13 @@ socket.on('answer', (data) => {
 
 socket.on('user-left', (data) => {
     var left_user_id = data.peer_id;
-    resetPeerConnection();
     remote_peer_id = null;
     remote_peer_name = null;
     remote_video.srcObject = null;
+    resetPeerConnection();
+    resetMediaStreams();
     alert("User has left the Video Call !!");
+    window.location.href = "/";
 });
 
 function resetPeerConnection() {
