@@ -7,6 +7,7 @@ var _ = require('lodash');
 var Room = require('./app/room');
 var Peer = require('./app/peer');
 var app = express();
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 var room = new Room(504555);
@@ -15,9 +16,9 @@ var rooms = {
 };
 
 app.use(express.static('public'));
-var server = app.listen(3000, () => {
+var server = app.listen(PORT, '0.0.0.0', () => {
     console.log(__dirname);
-    console.log(`Example app listening at http://localhost:3000`)
+    console.log(`Example app listening at http://localhost:${PORT}`)
 });
 
 
