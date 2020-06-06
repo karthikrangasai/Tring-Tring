@@ -32,21 +32,21 @@
                 </div> -->
             </div>
         </div>
-        <video class="local-video" id="local-video" autoplay playsinline></video>
+        <video class="local-video" id="local-video" autoplay playsinline muted="muted"></video>
     </div>
     <div id="join-call">
         <div class="join-call-container">
             <!-- <h1>Preview of the Input Media</h1> -->
             <div class="join-video-demo">
-                <video class="join-video-demo-video" id="demo-video" autoplay></video>
-                <div class="constraints-controls">
+                <video class="join-video-demo-video" id="demo-video" autoplay muted="muted"></video>
+                <!-- <div class="constraints-controls">
                     <div class="constraints-control on" id="join-control-audio">
-                        <i class="medium material-icons">mic_off</i>
+                        <i class="medium material-icons">mic</i>
                     </div>
                     <div class="constraints-control on" id="join-control-video">
                         <i class="medium material-icons">videocam</i>
                     </div>
-                </div>
+                </div> -->
             </div>
             <input type="text" name="peer_name" id="peer-name" class="input" placeholder="Enter Your Name"><br />
             <button class="btn" id="join-btn" onclick="onJoin()">Join Room</button>

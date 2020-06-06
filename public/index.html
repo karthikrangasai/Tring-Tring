@@ -11,35 +11,18 @@
 </head>
 
 <body>
-    <!-- <div class="video-displays">
-        <video class="remote-video" autoplay playsinline></video>
-        <div class="controls-container">
-            <div class="controls">
-		<div class="control blue">
-			<i class="medium material-icons">mic</i>
-		</div>
-		<div class="control red">
-			<i class="medium material-icons">call_end</i>
-		</div>
-		<div class="control blue">
-			<i class="medium material-icons">videocam</i>
-		</div>
-		</div>
-		</div>
-		<video class="local-video" autoplay playsinline></video>
-    </div> -->
     <div class="join-call">
         <div class="join-call-container">
-            <form class="" method="GET" action="">
-                <label for="create_room_id">Input a Room Code or Generate One: </label>
+            <form class="form" method="GET" action="">
+                <label for="create_room_id" id="input-label">Input a Room Code or Generate One: </label>
                 <input type="text" name="create_room_id" id="create-room-id" class="input" placeholder="Enter Room Number">
                 <button class="btn" id="generate-btn" type="button">Generate Random Room</button><br />
                 <button class="btn" id="create-btn" type="button">Create a New Room</button><br />
             </form>
-            <div class="">
+            <div class="form">
                 <h4 class="dash">OR</h4><br />
             </div>
-            <form class="" action="">
+            <form class="form" action="">
                 <input type="text" name="join_room_id" id="join-room-id" class="input" placeholder="Enter Room Number" autocomplete="off"><br />
                 <button class="btn" id="join-btn" type="button">Join an Existing Room</button>
             </form>

@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
         var room = rooms[room_id];
         console.log(">>> Before Removing user");
         console.log(room);
-        if (room.deletePeer(peer_id)) {
+        if (room && room.deletePeer(peer_id)) {
             socket.leave(room_id);
             console.log(">>> After Removing user");
             console.log(room);

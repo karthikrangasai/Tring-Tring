@@ -75,8 +75,18 @@ body {
 }
 
 .join-call-container {
-    margin: 17% auto;
-    width: 30%;
+    margin: 0 auto;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 80%;
+    margin: 25px 0;
 }
 
 .btn {
@@ -122,6 +132,15 @@ body {
     position: absolute;
     right: 0%;
     top: 50%;
+}
+
+#input-label {
+    color: #f5eaea;
+    display: block;
+    font-size: 1.45em;
+    margin: 0 auto;
+    padding: .4em 0;
+    width: 60%;
 }
 
 .input {
