@@ -6,26 +6,22 @@ var socket = require('socket.io');
 var _ = require('lodash');
 var Room = require('./app/room');
 var Peer = require('./app/peer');
-var app = express();
 const PORT = process.env.PORT || 3000;
-
-app.set('view engine', 'ejs');
 var room = new Room(504555);
 var rooms = {
     504555: room
 };
 
+var app = express();
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
 var server = app.listen(PORT, '0.0.0.0', () => {
     console.log(__dirname);
     console.log(`Example app listening at http://localhost:${PORT}`)
 });
-
-
 app.get('/', (req, res) => {
     res.render("index.html");
 });
-
 app.get('/r/:room_id', (req, res) => {
     var room_id = req.params.room_id;
     var room;
@@ -39,7 +35,26 @@ app.get('/r/:room_id', (req, res) => {
 });
 
 
-var io = socket(server);
+// var server = express()
+//     .set('view engine', 'ejs')
+//     .use(express.static(__dirname + 'public'))
+//     .get('/', (req, res) => {
+//         res.sendFile(path.join(__dirname + "/public/index.html"));
+//     })
+//     .get('/r/:room_id', (req, res) => {
+//         var room_id = req.params.room_id;
+//         var room;
+//         console.log(room_id);
+//         if (rooms[room_id]) {
+//             console.log(rooms[room_id]);
+//             res.sendFile(path.join(__dirname + "/public/videocall.html"));
+//         } else {
+//             res.redirect('/');
+//         }
+//     })
+//     .listen(PORT, '0.0.0.0', () => { console.log("Listening on port" + PORT) });
+
+const io = socket(server);
 io.on('connection', (socket) => {
     console.log("One browser connected");
     // console.log(io.sockets);

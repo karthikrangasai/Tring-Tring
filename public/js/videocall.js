@@ -5,8 +5,8 @@ var demo_stream;
 var demo_video = document.getElementById('demo-video');
 var peer_name_input = document.getElementById('peer-name');
 var join_btn = document.getElementById('join-btn');
-var join_control_video = document.getElementById('join-control-video');
-var join_control_audio = document.getElementById('join-control-audio');
+// var join_control_video = document.getElementById('join-control-video');
+// var join_control_audio = document.getElementById('join-control-audio');
 var error_label = document.getElementById('error-label');
 var join_call = document.getElementById('join-call');
 
@@ -23,33 +23,33 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) 
     retreived_user_media = false;
 });
 
-// Media Tooglers for the Demo MediaStream Input
-join_control_audio.addEventListener('click', (e) => {
-    var audioTrack = demo_stream.getAudioTracks()[0];
-    if (audioTrack.enabled) {
-        e.target.innerHTML = "mic_off";
-        call_audio_control.innerHTML = "mic_off";
-        user_input_audio_toggle = false;
-    } else {
-        e.target.innerHTML = "mic";
-        call_audio_control.innerHTML = "mic";
-        user_input_audio_toggle = true;
-    }
-    audioTrack.enabled = !audioTrack.enabled;
-});
-join_control_video.addEventListener('click', (e) => {
-    var videoTrack = demo_stream.getVideoTracks()[0];
-    if (videoTrack.enabled) {
-        e.target.innerHTML = "videocam_off";
-        call_video_control.innerHTML = "videocam_off"
-        user_input_audio_toggle = false;
-    } else {
-        e.target.innerHTML = "videocam";
-        call_video_control.innerHTML = "videocam"
-        user_input_audio_toggle = true;
-    }
-    videoTrack.enabled = !videoTrack.enabled;
-});
+// // Media Tooglers for the Demo MediaStream Input
+// join_control_audio.addEventListener('click', (e) => {
+//     var audioTrack = demo_stream.getAudioTracks()[0];
+//     if (audioTrack.enabled) {
+//         e.target.innerHTML = "mic_off";
+//         call_audio_control.innerHTML = "mic_off";
+//         user_input_audio_toggle = false;
+//     } else {
+//         e.target.innerHTML = "mic";
+//         call_audio_control.innerHTML = "mic";
+//         user_input_audio_toggle = true;
+//     }
+//     audioTrack.enabled = !audioTrack.enabled;
+// });
+// join_control_video.addEventListener('click', (e) => {
+//     var videoTrack = demo_stream.getVideoTracks()[0];
+//     if (videoTrack.enabled) {
+//         e.target.innerHTML = "videocam_off";
+//         call_video_control.innerHTML = "videocam_off"
+//         user_input_audio_toggle = false;
+//     } else {
+//         e.target.innerHTML = "videocam";
+//         call_video_control.innerHTML = "videocam"
+//         user_input_audio_toggle = true;
+//     }
+//     videoTrack.enabled = !videoTrack.enabled;
+// });
 
 
 
