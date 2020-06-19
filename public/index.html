@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -13,19 +14,35 @@
 <body>
     <div class="join-call">
         <div class="join-call-container">
-            <form class="form" method="GET" action="">
-                <label for="create_room_id" id="input-label">Input a Room Code or Generate One: </label>
-                <input type="text" name="create_room_id" id="create-room-id" class="input" placeholder="Enter Room Number">
-                <button class="btn" id="generate-btn" type="button">Generate Random Room</button><br />
+            <div class="form">
+                <h3 class="section-heading"><span class="heading">CREATE NEW ROOM</span></h3>
+                <div class="room-code">
+                    <label for="create_room_id" class="input-label">Input a Room Code or Generate One: </label>
+                    <input type="text" name="create_room_id" id="create-room-id" class="input" placeholder="Enter Room Number">
+                    <button class="btn" id="generate-btn" type="button">Generate Random Room</button><br />
+                </div>
+                <div class="room-password">
+                    <label for="create_room_id" class="input-label">Require Password: </label>
+                    <input type="checkbox" name="password_exists" id="create_pw_exists" class="checkbox">
+                </div>
                 <button class="btn" id="create-btn" type="button">Create a New Room</button><br />
-            </form>
+            </div>
             <div class="form">
                 <h4 class="dash">OR</h4><br />
             </div>
-            <form class="form" action="">
-                <input type="text" name="join_room_id" id="join-room-id" class="input" placeholder="Enter Room Number" autocomplete="off"><br />
+            <div class="form">
+                <h3 class="section-heading"><span class="heading">JOIN EXISTING ROOM</span></h3>
+                <div class="room-code">
+                    <label for="create_room_id" class="input-label">Enter Room Code: </label>
+                    <input type="text" name="join_room_id" id="join-room-id" class="input" placeholder="Enter Room Number" autocomplete="off"><br />
+                </div>
+                <div class="room-password">
+                    <label for="create_room_id" class="input-label">Password Exists: </label>
+                    <input type="checkbox" name="password_exists" id="join_pw_exists" class="checkbox">
+                    <input type="password" name="join_room_password" id="join-room-password" class="input" placeholder="Enter Room Password" autocomplete="off"><br />
+                </div>
                 <button class="btn" id="join-btn" type="button">Join an Existing Room</button>
-            </form>
+            </div>
         </div>
 
     </div>

@@ -3,7 +3,12 @@ var generate_btn = document.getElementById('generate-btn');
 var room_id = document.getElementById('create-room-id');
 var join_room_id = document.getElementById('join-room-id');
 var join_btn = document.getElementById('join-btn');
+var create_room_password_check = document.getElementById('create_pw_exists');
+var join_room_password_check = document.getElementById('join_pw_exists');
+var join_room_password_input = document.getElementById('join-room-password');
 var socket = io();
+
+var password = Math.random().toString(36).substring(2, 10)
 
 generate_btn.addEventListener('click', () => {
     console.log(room_id);
