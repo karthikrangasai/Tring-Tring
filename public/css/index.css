@@ -76,6 +76,10 @@ body {
     width: 10vw;
 }
 
+#create-room-password {
+    display: none;
+}
+
 .btn {
     height: 4em;
     width: 15vw;

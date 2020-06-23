@@ -14,23 +14,25 @@
 <body>
     <div class="join-call">
         <div class="join-call-container">
-            <div class="form">
+            <form class="form" action="r" method="POST" name="create_room_form" onsubmit="return setCreateRoomURL()">
                 <h3 class="section-heading"><span class="heading">CREATE NEW ROOM</span></h3>
                 <div class="room-code">
-                    <label for="create_room_id" class="input-label">Input a Room Code or Generate One: </label>
+                    <label for="create_room_id" class="input-label">Generate Room Code: </label>
                     <input type="text" name="create_room_id" id="create-room-id" class="input" placeholder="Enter Room Number">
                     <button class="btn" id="generate-btn" type="button">Generate Random Room</button><br />
                 </div>
                 <div class="room-password">
                     <label for="create_room_id" class="input-label">Require Password: </label>
                     <input type="checkbox" name="password_exists" id="create_pw_exists" class="checkbox">
+                    <input type="text" name="create_room_password" class="input" id="create-room-password" readonly>
                 </div>
-                <button class="btn" id="create-btn" type="button">Create a New Room</button><br />
-            </div>
+                <input type="hidden" id="func-type" name="func_type" value="create">
+                <button class="btn" id="create-btn" type="submit">Create a New Room</button><br />
+            </form>
             <div class="form">
                 <h4 class="dash">OR</h4><br />
             </div>
-            <div class="form">
+            <form class="form" action="r" method="POST" name="join_room_form" onsubmit="return setJoinRoomURL()">
                 <h3 class="section-heading"><span class="heading">JOIN EXISTING ROOM</span></h3>
                 <div class="room-code">
                     <label for="create_room_id" class="input-label">Enter Room Code: </label>
@@ -41,8 +43,9 @@
                     <input type="checkbox" name="password_exists" id="join_pw_exists" class="checkbox">
                     <input type="password" name="join_room_password" id="join-room-password" class="input" placeholder="Enter Room Password" autocomplete="off"><br />
                 </div>
-                <button class="btn" id="join-btn" type="button">Join an Existing Room</button>
-            </div>
+                <input type="hidden" id="func-type" name="func_type" value="join">
+                <button class="btn" id="join-btn" type="submit">Join an Existing Room</button>
+            </form>
         </div>
 
     </div>

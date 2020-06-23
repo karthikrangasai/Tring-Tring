@@ -1,8 +1,9 @@
 var _ = require('lodash');
 
 class Room {
-    constructor(room_id) {
+    constructor(room_id, room_pass) {
         this.room_id = room_id;
+        this.room_pass = room_pass;
         this.no_of_peers = 2;
         this.peers = {};
     }
@@ -30,6 +31,10 @@ class Room {
         //     return (peer.peer_id === peer_id);
         // });
         return (delete this.peers[peer_id]);
+    }
+
+    passwordMatches(password) {
+        return (this.room_pass === password);
     }
 }
 
