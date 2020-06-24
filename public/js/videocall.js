@@ -5,13 +5,13 @@ var demo_stream;
 var demo_video = document.getElementById('demo-video');
 var peer_name_input = document.getElementById('peer-name');
 var join_btn = document.getElementById('join-btn');
-// var join_control_video = document.getElementById('join-control-video');
-// var join_control_audio = document.getElementById('join-control-audio');
+var join_control_video = document.getElementById('join-control-video');
+var join_control_audio = document.getElementById('join-control-audio');
 var error_label = document.getElementById('error-label');
 var join_call = document.getElementById('join-call');
 
 // Methods for Media Inut and Toggling Audio and Video Inputs
-navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) => {
+navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true }, video: true }).then((stream) => {
     retreived_user_media = true;
     console.log(stream);
     demo_stream = stream;
@@ -23,33 +23,35 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) 
     retreived_user_media = false;
 });
 
-// // Media Tooglers for the Demo MediaStream Input
-// join_control_audio.addEventListener('click', (e) => {
-//     var audioTrack = demo_stream.getAudioTracks()[0];
-//     if (audioTrack.enabled) {
-//         e.target.innerHTML = "mic_off";
-//         call_audio_control.innerHTML = "mic_off";
-//         user_input_audio_toggle = false;
-//     } else {
-//         e.target.innerHTML = "mic";
-//         call_audio_control.innerHTML = "mic";
-//         user_input_audio_toggle = true;
-//     }
-//     audioTrack.enabled = !audioTrack.enabled;
-// });
-// join_control_video.addEventListener('click', (e) => {
-//     var videoTrack = demo_stream.getVideoTracks()[0];
-//     if (videoTrack.enabled) {
-//         e.target.innerHTML = "videocam_off";
-//         call_video_control.innerHTML = "videocam_off"
-//         user_input_audio_toggle = false;
-//     } else {
-//         e.target.innerHTML = "videocam";
-//         call_video_control.innerHTML = "videocam"
-//         user_input_audio_toggle = true;
-//     }
-//     videoTrack.enabled = !videoTrack.enabled;
-// });
+// Media Tooglers for the Demo MediaStream Input
+join_control_audio.addEventListener('click', (e) => {
+    var audioTrack = demo_stream.getAudioTracks()[0];
+    if (audioTrack.enabled) { // If audio was not muted, we are going to mute
+        e.target.innerHTML = "mic_off";
+        call_audio_control.innerHTML = "mic_off";
+        user_muted_audio = false;
+        console.info("Muted");
+    } else { // Else, we are going to unmute
+        e.target.innerHTML = "mic";
+        call_audio_control.innerHTML = "mic";
+        user_muted_audio = true;
+        console.info("UnMuted");
+    }
+    audioTrack.enabled = !audioTrack.enabled;
+});
+join_control_video.addEventListener('click', (e) => {
+    var videoTrack = demo_stream.getVideoTracks()[0];
+    if (videoTrack.enabled) { // If video was not blocked, we are going to block
+        e.target.innerHTML = "videocam_off";
+        call_video_control.innerHTML = "videocam_off"
+        user_blocked_video = true;
+    } else { // Else, we are going to unblock
+        e.target.innerHTML = "videocam";
+        call_video_control.innerHTML = "videocam"
+        user_blocked_video = false;
+    }
+    videoTrack.enabled = !videoTrack.enabled;
+});
 
 
 
@@ -68,12 +70,12 @@ var call_audio_control = document.getElementById('call-audio-control');
 var call_video_control = document.getElementById('call-video-control');
 var call_cut_control = document.getElementById('call-cut-control');
 var retreived_user_media;
-var user_input_audio_toggle = false;
-var user_input_video_toggle = true;
+var user_muted_audio = false;
+var user_blocked_video = false;
 var peer_connection;
 var mediaConstraints = {
-    audio: user_input_audio_toggle,
-    video: user_input_video_toggle
+    audio: user_muted_audio,
+    video: user_blocked_video
 }
 var peer_connection_configuration = {
     "iceServers": [
@@ -122,7 +124,7 @@ var remote_video = document.getElementById('remote-video');
 // Start of the functions
 function onJoin() {
     var temp = peer_name_input.value;
-    if (!(temp === "")) {
+    if (!(temp === "") && retreived_user_media) {
         error_label.style.display = "none";
         peer_name = temp;
         console.log(peer_name);
@@ -141,15 +143,15 @@ function onJoin() {
             console.log(stream);
             local_stream = stream;
             local_video.srcObject = local_stream;
-            if (!user_input_audio_toggle) {
+            if (user_muted_audio) {
                 var audioTrack_demo = local_stream.getAudioTracks()[0];
-                // audioTrack_demo.enabled = !audioTrack_demo.enabled;
-                audioTrack_demo.enabled = false;
+                audioTrack_demo.enabled = !audioTrack_demo.enabled;
+                // audioTrack_demo.enabled = false;
             }
-            if (!user_input_video_toggle) {
+            if (user_blocked_video) {
                 var videoTrack_demo = local_stream.getVideoTracks()[0];
-                // audioTrack_demo.enabled = !audioTrack_demo.enabled;
-                videoTrack_demo.enabled = false;
+                videoTrack_demo.enabled = !videoTrack_demo.enabled;
+                // videoTrack_demo.enabled = false;
             }
 
             // demo_video.onpause();
@@ -180,8 +182,12 @@ function onJoin() {
             peer_connection = null;
         });
     } else {
-        error_label.innerText = 'Please Enter a Name !!';
-        error_label.style.display = "block";
+        if (!retreived_user_media) {
+            alert("Please provide access to any or all Media Devices !!")
+        } else {
+            error_label.innerText = 'Please Enter a Name !!';
+            error_label.style.display = "block";
+        }
     }
 }
 
@@ -313,6 +319,7 @@ socket.on('user-joined', (data) => {
             type: 'offer',
             sdp: peer_connection.localDescription
         });
+        document.getElementById('room-size').innerText = data.room_size;
     }).catch((error) => {
         console.log(error);
     });
