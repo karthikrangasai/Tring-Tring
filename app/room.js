@@ -36,6 +36,10 @@ class Room {
     passwordMatches(password) {
         return (this.room_pass === password);
     }
+
+    currentRoomSize() {
+        return Object.keys(this.peers).length;
+    }
 }
 
 module.exports = Room;

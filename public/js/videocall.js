@@ -319,6 +319,7 @@ socket.on('user-joined', (data) => {
             type: 'offer',
             sdp: peer_connection.localDescription
         });
+        document.getElementById('room-size').innerText = data.room_size;
     }).catch((error) => {
         console.log(error);
     });

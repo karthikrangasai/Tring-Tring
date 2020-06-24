@@ -5,7 +5,8 @@
 	- [ ] It is still buggy, needs a fix.
 - [ ] Setup Decent UI using Material
 - [x] Add password for Rooms (using Password should be Optional)
-- [ ] Show room details to all the users in the call (Use EJS templates)
+- [x] Show room details to all the users in the call (Use Pug templates)
+	- [ ] Current Room Size display is buggy
 - [ ] Add at will screen share ability
 - [ ] Increase Call capacity to 4
-- [ ] Add face filters
+- [ ] Add face filters (Tensorflow.js ??)

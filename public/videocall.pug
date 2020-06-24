@@ -1,0 +1,69 @@
+doctype html(lang='en')
+html
+	head
+		meta(charset='UTF-8')
+		|
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		|
+		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		|
+		link(rel='stylesheet', href='/css/videocall.css')
+		|
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js')
+		|
+		title 1-1 P2P App
+
+	body
+		.video-displays
+			video#remote-video.remote-video(autoplay='', playsinline='')
+			|
+			.controls-container
+				.room-details
+					.room-detail
+						span Room ID: 
+						|
+						span= room_id
+						|
+					if room_pass
+						.room-detail
+							span Room Password: 
+							|
+							span= room_pass
+							|
+					.room-detail
+						span Current Room Size: 
+						|
+						span#room-size= room_size
+						|
+				.controls
+					#call-audio-control.control.on
+						i.medium.material-icons mic
+						|
+					#call-cut-control.control.off(onclick='onCutCall()')
+						i.medium.material-icons call_end
+						|
+					#call-video-control.control.on
+						i.medium.material-icons videocam
+						|
+				video#local-video.local-video(autoplay='', playsinline='', muted='muted')
+				|
+		#join-call
+			.join-call-container
+				.join-video-demo
+					video#demo-video.join-video-demo-video(autoplay='', muted='muted')
+					|
+					.constraints-controls
+						#join-control-audio.constraints-control.on
+							i.medium.material-icons mic_off
+							|
+						#join-control-video.constraints-control.on
+							i.medium.material-icons videocam
+							|
+				input#peer-name.input(type='text', name='peer_name', placeholder='Enter Your Name')
+				br
+				|
+				button#join-btn.btn(onclick='onJoin()') Join Room
+				|
+				span#error-label.error Please Enter a Name !!
+				|
+	script(src='/js/videocall.js')
