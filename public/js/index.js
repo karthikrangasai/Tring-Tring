@@ -13,38 +13,38 @@ var join_room_password_input = document.getElementById('join-room-password');
 create_room_password_input.value = Math.random().toString(36).substring(2, 10);
 
 generate_btn.addEventListener('click', () => {
-    console.log(create_room_id);
-    var num = Math.floor(Math.random() * 1000000);
-    create_room_id.value = num;
+	console.log(create_room_id);
+	var num = Math.floor(Math.random() * 1000000);
+	create_room_id.value = num;
 
 });
 
 function setCreateRoomURL() {
-    document.create_room_form.action = "r/" + create_room_id.value;
+	document.create_room_form.action = "r/" + create_room_id.value;
 }
 
 function setJoinRoomURL() {
-    document.join_room_form.action = "r/" + join_room_id.value;
+	document.join_room_form.action = "r/" + join_room_id.value;
 }
 
 create_room_password_check.addEventListener('click', (event) => {
-    console.log(event);
-    if (event.srcElement.checked === true) {
-        create_room_password_input.value = Math.random().toString(36).substring(2, 10);
-        create_room_password_input.style.display = "block";
-    } else {
-        create_room_password_input.value = null;
-        create_room_password_input.style.display = "none";
-    }
+	console.log(event);
+	if (event.srcElement.checked === true) {
+		create_room_password_input.value = Math.random().toString(36).substring(2, 10);
+		create_room_password_input.style.display = "block";
+	} else {
+		create_room_password_input.value = null;
+		create_room_password_input.style.display = "none";
+	}
 });
 
 join_room_password_check.addEventListener('click', (event) => {
-    console.log(event);
-    if (event.srcElement.checked === true) {
-        join_room_password_input.style.display = "block";
-    } else {
-        join_room_password_input.style.display = "none";
-    }
+	console.log(event);
+	if (event.srcElement.checked === true) {
+		join_room_password_input.style.display = "block";
+	} else {
+		join_room_password_input.style.display = "none";
+	}
 });
 
 // create_btn.addEventListener('click', (event) => {
